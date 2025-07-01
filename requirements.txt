@@ -1,8 +1,10 @@
-streamlit==1.26.0
-scikit-learn==1.2.2
-requests
+streamlit~=1.26.0
+scikit-learn~=1.2.2
+wikipedia-api
 beautifulsoup4
-git+https://github.com/martin-majlis/Wikipedia-API.git
+requests
+newspaper3k
+
 
 
 
