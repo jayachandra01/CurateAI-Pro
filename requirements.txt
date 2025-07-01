@@ -1,7 +1,7 @@
-streamlit
-transformers
+streamlit==1.26.0
+scikit-learn==1.2.2
+requests
+beautifulsoup4
 wikipedia
-torch
-toml
-scikit-learn==1.4.2
+
 
