@@ -2,3 +2,4 @@ streamlit
 transformers
 wikipedia
 torch
+toml
