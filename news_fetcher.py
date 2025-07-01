@@ -12,8 +12,15 @@ def fetch_news_articles(query, top_k=5):
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
-        articles = response.json().get("articles", [])
+
+        # 🔍 Print full response to debug
+        data = response.json()
+        print("🔍 DEBUG: NewsAPI Response =", data)
+
+        articles = data.get("articles", [])
         return [(a["title"], a["url"]) for a in articles if a.get("title") and a.get("url")]
+
     except Exception as e:
         print(f"[News Fetch Error]: {e}")
         return []
+
