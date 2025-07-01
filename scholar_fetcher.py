@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-SERPAPI_KEY = st.secrets["SERPAPI_API_KEY"]
+SCHOLAR_KEY = st.secrets["api_keys"]["scholar_api_key"]
 
 def fetch_scholar_links(query, limit=5):
     url = "https://serpapi.com/search.json"
