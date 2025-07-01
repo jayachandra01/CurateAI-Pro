@@ -1,8 +1,7 @@
 import requests
-import toml
+import streamlit as st
+API_KEY = st.secrets["NEWSAPI_KEY"]
 
-config = toml.load("config.toml")
-API_KEY = config["api_keys"]["news_api_key"]
 
 def fetch_news_articles(query, top_k=5):
     url = (
