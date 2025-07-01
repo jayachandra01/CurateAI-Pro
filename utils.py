@@ -1,8 +1,15 @@
-def deduplicate_results(results):
+# utils.py
+
+from typing import List, Tuple
+
+def deduplicate_links(links: List[Tuple[str, str]]) -> List[Tuple[str, str]]:
+    """
+    Remove duplicate URLs from the list of (title, url) tuples.
+    """
     seen = set()
-    unique = []
-    for title, url in results:
+    unique_links = []
+    for title, url in links:
         if url not in seen:
-            unique.append((title, url))
             seen.add(url)
-    return unique
+            unique_links.append((title, url))
+    return unique_links
