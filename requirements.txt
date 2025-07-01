@@ -3,3 +3,5 @@ transformers
 wikipedia
 torch
 toml
+scikit-learn==1.4.2
+
