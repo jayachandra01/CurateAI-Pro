@@ -1,0 +1,6 @@
+
+streamlit
+transformers
+wikipedia
+requests
+torch
