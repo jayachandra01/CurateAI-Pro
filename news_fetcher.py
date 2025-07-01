@@ -1,6 +1,6 @@
 import requests
 import streamlit as st
-API_KEY = st.secrets["newsapi_key"]
+API_KEY = st.secrets["api_keys"]["news_api_key"]
 
 
 def fetch_news_articles(query, top_k=5):
