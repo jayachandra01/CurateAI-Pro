@@ -1,20 +1,16 @@
 import wikipedia
 
-def fetch_wikipedia_links(topics, max_links=5):
-    links = []
-    for topic in topics:
-        try:
-            page = wikipedia.page(topic)
-            links.append((topic, page.url))
-            if len(links) >= max_links:
-                break
-        except wikipedia.exceptions.DisambiguationError as e:
-            # If multiple meanings, try the first suggestion
+def fetch_wikipedia_links(query, top_k=5):
+    try:
+        search_results = wikipedia.search(query, results=top_k)
+        links = []
+        for title in search_results:
             try:
-                page = wikipedia.page(e.options[0])
-                links.append((e.options[0], page.url))
+                page = wikipedia.page(title, auto_suggest=False)
+                links.append((page.title, page.url))
             except Exception:
                 continue
-        except Exception:
-            continue
-    return links
+        return links
+    except Exception as e:
+        print(f"[Wikipedia Error]: {e}")
+        return []
