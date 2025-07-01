@@ -1,7 +1,8 @@
 streamlit~=1.26.0
 scikit-learn~=1.2.2
 requests
-wikipedia
+wikipedia-api
 beautifulsoup4
+
 
 
