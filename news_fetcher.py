@@ -1,20 +1,20 @@
 import requests
 import toml
 
-# Load API key from config
 config = toml.load("config.toml")
-NEWS_API_KEY = config["api_keys"]["news_api_key"]
+API_KEY = config["api_keys"]["news_api_key"]
 
-def fetch_news_articles(query, max_articles=5):
+def fetch_news_articles(query, top_k=5):
     url = (
-        f"https://newsapi.org/v2/everything?q={query}&sortBy=relevancy"
-        f"&language=en&pageSize={max_articles}&apiKey={NEWS_API_KEY}"
+        f"https://newsapi.org/v2/everything?q={query}"
+        f"&language=en&pageSize={top_k}&sortBy=relevancy&apiKey={API_KEY}"
     )
+
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
         articles = response.json().get("articles", [])
-        return [(article["title"], article["url"]) for article in articles]
+        return [(a["title"], a["url"]) for a in articles if a.get("title") and a.get("url")]
     except Exception as e:
-        print("News fetch error:", e)
+        print(f"[News Fetch Error]: {e}")
         return []
