@@ -4,6 +4,7 @@ wikipedia-api
 beautifulsoup4
 requests
 newspaper3k
+feedparser
 
 
 
