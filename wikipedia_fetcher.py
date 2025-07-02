@@ -1,24 +1,33 @@
 import wikipediaapi
+from sentence_transformers import SentenceTransformer, util
+
+model = SentenceTransformer("all-MiniLM-L6-v2")
+wiki_wiki = wikipediaapi.Wikipedia('en')
 
 def fetch_wikipedia_links(query, top_k=5):
     try:
-        wiki = wikipediaapi.Wikipedia('en')
-        page = wiki.page(query)
+        search_results = wiki_wiki.search(query)
 
-        # If exact match page is missing, return empty
-        if not page.exists():
+        if not search_results:
             return []
 
-        links = []
-        for linked_title in page.links.keys():
-            linked_page = wiki.page(linked_title)
-            if linked_page.exists():
-                links.append((linked_page.title, linked_page.fullurl))
-            if len(links) >= top_k:
-                break
+        titles = search_results[:top_k * 2]  # Fetch extra to rerank better
+        embeddings = model.encode(titles, convert_to_tensor=True)
+        query_embedding = model.encode(query, convert_to_tensor=True)
 
-        return links
+        scores = util.pytorch_cos_sim(query_embedding, embeddings)[0]
+        top_indices = scores.topk(top_k).indices
 
+        results = []
+        for i in top_indices:
+            title = titles[i]
+            page = wiki_wiki.page(title)
+            if page.exists():
+                results.append((title, page.fullurl))
+
+        return results
     except Exception as e:
-        print(f"[Wikipedia Error]: {e}")
+        import streamlit as st
+        st.error("Error fetching Wikipedia articles.")
+        st.exception(e)
         return []
