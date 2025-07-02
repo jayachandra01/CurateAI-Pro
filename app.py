@@ -4,7 +4,7 @@ import traceback
 from utils import extract_keywords, deduplicate_links, extract_text_from_url
 from wikipedia_fetcher import fetch_wikipedia_links
 from news_fetcher import fetch_news_articles
-from research_fetcher import fetch_research_papers
+from scholar_fetcher import fetch_research_papers
 
 st.set_page_config(page_title="CurateAI Pro Reading List Generator", page_icon="📚")
 st.title("📚 CurateAI Pro Reading List Generator")
