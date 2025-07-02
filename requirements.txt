@@ -3,11 +3,13 @@ scikit-learn>=1.4.0
 wikipedia-api
 beautifulsoup4
 requests
-newspaper3k
 feedparser
 sentence-transformers
 torch
-cssselect
+newspaper3k==0.2.8
+lxml==4.9.3
+cssselect==1.2.0
+
 
 
 
